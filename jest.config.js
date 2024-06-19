@@ -5,4 +5,5 @@ testEnvironment: 'node',
 rootDir: './',
   moduleDirectories: ['node_modules', 'src'],
   modulePaths: ['<rootDir>/src', '<rootDir>/node_modules'],
+  setupFiles: ['dotenv/config'],
 };
