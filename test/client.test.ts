@@ -13,9 +13,14 @@ const config:{
 
 const client = new TrieveClient(config);
 
-test('getDataset', async () => {
+test('getDatasets', async () => {
+    const result = await client.getDatasets();
+    console.log(result);
+    expect(result).toBeDefined();
+});
 
-    const result = await client.getDataset();
+test('getMe', async () => {
+    const result = await client.getMe();
     console.log(result);
     expect(result).toBeDefined();
 });

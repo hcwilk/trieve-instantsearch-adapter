@@ -13,19 +13,33 @@ export class TrieveClient {
     ) {
         this.headers = {
             'Authorization': this.config.apiKey,
-            'TR-Organization': this.config.organizationId
         };
         console.log('TrieveClient constructor');
     }
 
-    public async getDataset(): Promise<any> {
+    public async getDatasets(): Promise<any> {
         try {
             const response = await axios.get(`${this.config.serverUrl}/api/dataset/organization/${this.config.organizationId}`, {
-                headers: this.headers
+                headers: 
+                {...this.headers,
+                'TR-Organization': this.config.organizationId}
             });
             return response.data;
         } catch (error) {
             console.error('Error fetching dataset:', error);
+            throw error;
+        }
+    }
+
+
+    public async getMe(): Promise<any> {
+        try {
+            const response = await axios.get(`${this.config.serverUrl}/api/auth/me`, {
+                headers: this.headers
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching me:', error);
             throw error;
         }
     }
