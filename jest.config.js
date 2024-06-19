@@ -3,5 +3,6 @@ export default {
 preset: 'ts-jest',
 testEnvironment: 'node',
 rootDir: './',
-modulePaths: ['./'],
+  moduleDirectories: ['node_modules', 'src'],
+  modulePaths: ['<rootDir>/src', '<rootDir>/node_modules'],
 };
