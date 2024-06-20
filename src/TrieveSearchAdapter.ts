@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-
 export default class TrieveSearchAdapter {
     apiUrl: string;
     apiKey: string;
