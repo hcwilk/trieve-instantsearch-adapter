@@ -43,16 +43,48 @@ export default class TrieveSearchAdapter {
             },
             body: JSON.stringify(body),
         });
+        const data = await response.json();
+
+        const trieveResults = data.score_chunks ?? [];
+
+        console.log("trieveResults", trieveResults);
+
+        const adaptedHits = trieveResults.map((hit: any) => {
+            return {
+                ...hit.metadata[0].metadata,
+            };
+        });
+
+        console.log("adaptedHits", adaptedHits);
+
+        const adaptedResults = [{
+            facets: {},
+            facets_status: {},
+            hits: adaptedHits,
+            hitsPerPage: 8,    
+            nbHits: trieveResults.length,
+            nbPages: 1,
+            page: 0,
+            processingTimeMS: 0,
+            query: query,
+            renderingContent: {}
+        }]
+
+
+
+        console.log("adaptedResults", adaptedResults);
+
+
+
 
         if (!response.ok) {
             console.error("Failed to fetch search results", response.status, await response.text());
             return { results: [] };
         }
 
-        const data = await response.json();
-        console.log("Received search results", data);
+        console.log("Received search results", adaptedResults);
         return {
-            results: data.score_chunks ?? []
+            results: adaptedResults ?? []
         };
     }
 }
