@@ -1,4 +1,4 @@
-import {TrieveClient} from '../src/client/TrieveClient';
+import {TrieveSearchClient} from '../src/client/TrieveSearchClient';
 
 const config:{
     serverUrl: string;
@@ -11,7 +11,7 @@ const config:{
     organizationId: process.env.TRIEVE_ORG_ID!
 };
 
-const client = new TrieveClient(config);
+const client = new TrieveSearchClient(config);
 
 test('getDatasets', async () => {
     const result = await client.getDatasets();
