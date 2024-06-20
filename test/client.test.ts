@@ -1,5 +1,10 @@
 import {TrieveSearchClient} from '../src/client/TrieveSearchClient';
 
+// test('test', () => {
+//     const num = 1
+//     expect(num).toBeDefined()
+// })
+
 const config:{
     serverUrl: string;
     apiKey: string;
@@ -7,7 +12,7 @@ const config:{
 }
 = {
     serverUrl: process.env.TRIEVE_URL!,
-    apiKey: process.env.TRIEVE_API_KEY!,
+    apiKey: process.env.TRIEVE_ADMIN_KEY!,
     organizationId: process.env.TRIEVE_ORG_ID!
 };
 
@@ -18,7 +23,6 @@ test('getDatasets', async () => {
     console.log(result);
     expect(result).toBeDefined();
 });
-
 test('getMe', async () => {
     const result = await client.getMe();
     console.log(result);

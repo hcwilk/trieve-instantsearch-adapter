@@ -20,6 +20,8 @@ export default class TrieveSearchAdapter {
 
     async search(instantsearchRequests: any) {
 
+        console.log("instantsearchRequests", instantsearchRequests);
+
         const query = instantsearchRequests[0].params.query;
 
         const hitsPerPage = instantsearchRequests[0].params.hitsPerPage;

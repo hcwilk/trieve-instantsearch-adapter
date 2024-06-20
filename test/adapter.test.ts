@@ -4,7 +4,22 @@ const adapter = new TrieveSearchAdapter(process.env.TRIEVE_API_KEY!, "fbacc151-5
 
 
 test('search', async () => {
-    // const result = await adapter.search();
-    // console.log(result);
-    // expect(result).toBeDefined();
+
+    const exampleBody = [
+        {
+ "indexName": "books",
+      "params": {
+        "facets": [],
+        "highlightPostTag": "</ais-highlight>",
+        "highlightPreTag": "<ais-highlight>",
+        "hitsPerPage": 8,
+        "page": 0,
+        "query": "murder",
+        "tagFilters": ""
+        }
+    }
+    ]
+    const result = await adapter.search(exampleBody);
+    console.log(result);
+    expect(result).toBeDefined();
 });
