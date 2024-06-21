@@ -1,9 +1,5 @@
 import {TrieveSearchClient} from '../src/client/TrieveSearchClient';
 
-// test('test', () => {
-//     const num = 1
-//     expect(num).toBeDefined()
-// })
 
 const config:{
     serverUrl: string;

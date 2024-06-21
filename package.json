@@ -1,6 +1,6 @@
 {
   "name": "trieve-instantsearch-adapter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Adapter between Trieve.ai and InstantSearch.js",
   "main": "dist/TrieveSearchAdapter.js",
   "scripts": {
@@ -21,6 +21,10 @@
     "typescript-eslint": "^7.13.0"
   },
   "type": "module",
+  "files": [
+    "dist/",
+    "src/"
+  ],
   "devDependencies": {
     "@jest/globals": "^29.1.1",
     "@types/axios": "^0.14.0",

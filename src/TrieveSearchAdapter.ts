@@ -19,9 +19,12 @@ export default class TrieveSearchAdapter {
 
     async search(instantsearchRequests: any) {
 
-        console.log("instantsearchRequests", instantsearchRequests);
+        let query = instantsearchRequests[0].params.query;
 
-        const query = instantsearchRequests[0].params.query;
+        // adding this here for the time being
+        if (query === "") {
+            query = "time";
+        }
 
         const hitsPerPage = instantsearchRequests[0].params.hitsPerPage;
         const body = {
@@ -34,9 +37,8 @@ export default class TrieveSearchAdapter {
             search_type: "hybrid"
         }
 
-        if (query === "") {
-            return { results: [] };
-        }
+
+
 
         const response = await fetch(`${this.apiUrl}/api/chunk/search`, {
             method: "POST",
@@ -51,16 +53,11 @@ export default class TrieveSearchAdapter {
 
         const trieveResults = data.score_chunks ?? [];
 
-        console.log("trieveResults", trieveResults);    
-
-
         const adaptedHits = trieveResults.map((hit: any) => {
             return {
                 ...hit.metadata[0].metadata,
             };
         });
-
-        console.log("adaptedHits", adaptedHits);
 
         if(adaptedHits.length === 0){
             console.log("No results found");
@@ -79,12 +76,6 @@ export default class TrieveSearchAdapter {
             query: query,
             renderingContent: {}
         }]
-
-
-
-        console.log("adaptedResults", adaptedResults);
-
-
 
 
         if (!response.ok) {
