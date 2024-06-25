@@ -20,20 +20,21 @@ export default class TrieveSearchAdapter {
     async search(instantsearchRequests: any) {
 
         let query = instantsearchRequests[0].params.query;
+        const page = instantsearchRequests[0].params.page;
 
         // adding this here for the time being
         if (query === "") {
             query = "time";
         }
 
-        const hitsPerPage = instantsearchRequests[0].params.hitsPerPage;
+        // const hitsPerPage = instantsearchRequests[0].params.hitsPerPage;
         const body = {
             filters: null,
             get_collisions: false,
             highlight_results: false,
-            page: 0,
+            page: page + 1,
             query: query,
-            page_size: hitsPerPage,
+            page_size: 8,
             search_type: "hybrid"
         }
 
@@ -51,6 +52,8 @@ export default class TrieveSearchAdapter {
         });
         const data = await response.json();
 
+        console.log("Received search results", data);
+
         const trieveResults = data.score_chunks ?? [];
 
         const adaptedHits = trieveResults.map((hit: any) => {
@@ -64,14 +67,15 @@ export default class TrieveSearchAdapter {
             return { results: [] };
         }
 
+
         const adaptedResults = [{
             facets: {},
             facets_status: {},
             hits: adaptedHits,
             hitsPerPage: 8,    
             nbHits: trieveResults.length,
-            nbPages: 1,
-            page: 0,
+            nbPages: 7,
+            page: page + 1,
             processingTimeMS: 0,
             query: query,
             renderingContent: {}
